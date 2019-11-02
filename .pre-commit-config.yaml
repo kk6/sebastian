@@ -23,4 +23,4 @@ repos:
     hooks:
       - id: mypy
         args: [--no-strict-optional, --ignore-missing-imports]
-        exclude: ^docs/conf.py
+        exclude: migrations|tests
