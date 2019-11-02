@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserChangeForm as UserChangeBaseForm
 from django.contrib.auth.forms import UserCreationForm as UserCreationBaseForm
 
@@ -17,3 +18,7 @@ class UserChangeForm(UserChangeBaseForm):
     class Meta:
         model = get_user_model()
         fields = ("name", "username", "email")
+
+
+class LoginForm(AuthenticationForm):
+    """ログインフォーム"""

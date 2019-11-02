@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,9 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Sebastian{% endblock title %}</title>
+  {% block css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  {% endblock %}
+  {% block js %}
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  {% endblock %}
 </head>
 <body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'index' %}">
+          <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-end">
+        {% if user.is_authenticated %}
+        <div class="navbar-item">
+          {% now "SHORT_DATETIME_FORMAT" %}
+        </div>
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-light" href="{% url 'logout' %}">
+              <strong>ログアウト</strong>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
   {% block content %}
   {% endblock content %}
+  {% block footer_js %}{% endblock %}
 </body>
 </html>
