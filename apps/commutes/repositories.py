@@ -10,6 +10,7 @@ class CommuteRepository:
     def create_commute(
         self,
         usage_type,
+        usage_text,
         departure_station,
         arrival_station,
         price,
@@ -19,6 +20,7 @@ class CommuteRepository:
     ):
         commute = self.model_commute(
             usage_type=usage_type,
+            usage_text=usage_text,
             departure_station=departure_station,
             arrival_station=arrival_station,
             price=price,

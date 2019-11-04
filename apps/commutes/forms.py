@@ -37,3 +37,20 @@ class CommuteForm(forms.Form):
     price = forms.DecimalField(label="金額")
     is_round_trip = forms.BooleanField(label="往復？", required=False)
     has_apply = forms.BooleanField(label="申請済み？", required=False)
+
+    def get_cleaned_results(self):
+        fields = (
+            "usage_type",
+            "usage_text",
+            "route",
+            "departure_station",
+            "arrival_station",
+            "date_of_use",
+            "price",
+            "is_round_trip",
+            "has_apply",
+        )
+        if self.is_valid():
+            return {f: self.cleaned_data[f] for f in fields}
+        else:
+            return {f: None for f in fields}
