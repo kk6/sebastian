@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h2>購入した書籍一覧</h2>
+        <div class="table-container">
+          <p>
+          <div class="buttons has-addons is-right">
+            <a class="button is-dark is-right" href="{% url 'book_purchase' %}">購入書籍登録</a>
+          </div>
+          </p>
+          {% include "_components/purchases_table.html" with book_purchases=book_purchases %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "_base.html" %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <div class="box">
+          <h2>購入した書籍を登録する</h2>
+          <form action="" method="POST">
+            {{ form.non_field_errors }}
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.title.name }}" class="input" type="text" placeholder="書籍名"
+                       value="{{ form.title.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-book"></i>
+              </span>
+              </div>
+              {% for error in form.title.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.isbn.name }}" class="input" type="text" placeholder="ISBN"
+                       value="{{ form.isbn.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-barcode"></i>
+              </span>
+              </div>
+              {% for error in form.isbn.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.purchase_at.name }}" class="input" type="date" placeholder="購入日"
+                       value="{{ form.purchase_at.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-calendar-alt"></i>
+              </span>
+              </div>
+              {% for error in form.purchase_at.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.price.name }}" class="input" type="number" placeholder="価格"
+                       value="{{ form.price.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-yen-sign"></i>
+              </span>
+              </div>
+              {% for error in form.price.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.price_reference_url.name }}" class="input" type="url" placeholder="価格の参考URL"
+                       value="{{ form.price_reference_url.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-link"></i>
+              </span>
+              </div>
+              {% for error in form.price_reference_url.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input name="{{ form.has_apply.name }}" type="checkbox"
+                         {% if form.has_apply.value %}checked{% endif %}">
+                  申請済み
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="button is-dark">登録</button>
+            <input type="hidden" name="next" value="{{ next }}"/>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

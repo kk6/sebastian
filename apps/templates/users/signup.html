@@ -1,0 +1,72 @@
+{% extends '_base.html' %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <div class="box">
+          <h2>登録フォーム</h2>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.username.name }}" class="input" type="text" placeholder="ユーザーID"
+                       value="{{ form.username.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+              </div>
+              {% for error in form.username.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input name="{{ form.name.name }}" class="input" type="email"" placeholder="メールアドレスを入力"
+                value="{{ form.name.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              </div>
+              {% for error in form.name.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left">
+                <input name="{{ form.password1.name }}" class="input" type="password" placeholder="パスワードを入力"
+                       value="{{ form.password1.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              </div>
+              {% for error in form.password1.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="field">
+              <div class="control has-icons-left">
+                <input name="{{ form.password2.name }}" class="input" type="password" placeholder="パスワードを入力（確認）"
+                       value="{{ form.password2.value|default_if_none:'' }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              </div>
+              {% for error in form.password2.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="control">
+              <button class="button is-dark" type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock content %}
