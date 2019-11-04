@@ -12,6 +12,7 @@ class Commute(models.Model):
     usage_type = models.IntegerField(
         "利用種別", choices=CommuteUsageTypes.choices(), default=CommuteUsageTypes.TO_WORK
     )
+    # usage_text = models.CharField("種別「その他」の場合に入力", max_length=255, null=True, blank=True)
     departure_station = models.CharField("出発駅", max_length=255)
     arrival_station = models.CharField("到着駅", max_length=255)
     price = models.DecimalField("金額", max_digits=10, decimal_places=2)

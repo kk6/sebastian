@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" integrity="sha256-q0wZgzQ6Ru67x+pIe9IAztrnlHNHyZui3BMwqUYDnpI=" crossorigin="anonymous" />
+{% endblock css %}
+
+{% block footer_js %}
+{{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js" integrity="sha256-0prQxFtdWQNa3vW5JDMbvbBp6ehKzf9UIWqFGZIWPPE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js" integrity="sha256-RbE9ux8UbaKexk/+aT9XkZ8tcUWg3yw/3XE/S8iW7eI=" crossorigin="anonymous"></script>
+<script>
+$(function() {
+
+  $("[name=usage_type]").change(function() {
+    if($("#id_usage_type_2").prop("checked")) {
+      $("#id_usage_text").prop("disabled", false)
+    }else{
+      $("#id_usage_text").prop("disabled", true)
+    }
+  });
+
+  $("[name=route]").change(function() {
+    if($("#id_route_1").prop("checked")) {
+      $("#id_departure_station").prop("disabled", false);
+      $("#id_arrival_station").prop("disabled", false);
+
+    }else{
+      $("#id_departure_station").prop("disabled", true);
+      $("#id_arrival_station").prop("disabled", true);
+    }
+  });
+
+})
+
+</script>
+{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <div class="box">
+          <form action="" method="post">
+            {{ form.as_p }}
+            <button type="submit" class="button is-dark">登録</button>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

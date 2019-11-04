@@ -3,6 +3,7 @@
   <tr>
     <th>利用日</th>
     <th>種別</th>
+    <th>経路</th>
     <th>金額</th>
     <th>申請済み</th>
   </tr>
@@ -12,6 +13,7 @@
     <tr>
       <td>{{ commute.date_of_use }}</td>
       <td>{{ commute.get_commute_usage_type_label }}</td>
+      <td>{{ commute.departure_station }} → {{ commute.arrival_station }}</td>
       <td>{{ commute.price }}</td>
       <td>
         {% if commute.has_apply %}
