@@ -31,6 +31,8 @@ class CommuteForm(forms.Form):
                 "data-multiple-dates": "true",
                 "data-multiple-dates-separator": ",",
                 "data-date-format": "yyyy/m/d",
+                "autocomplete": "off",
+                "data-position": "top left",
             }
         ),
     )
