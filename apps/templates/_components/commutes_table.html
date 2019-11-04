@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>利用日</th>
+    <th>種別</th>
+    <th>金額</th>
+    <th>申請済み</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for commute in commutes %}
+    <tr>
+      <td>{{ commute.date_of_use }}</td>
+      <td>{{ commute.get_commute_usage_type_label }}</td>
+      <td>{{ commute.price }}</td>
+      <td>
+        {% if commute.has_apply %}
+          <span class="icon has-text-success">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

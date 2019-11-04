@@ -23,5 +23,6 @@ urlpatterns = [
     path("", IndexView.as_view(template_name="index.html"), name="index"),
     path("", include("users.urls")),
     path("books/", include("books.urls")),
+    path("commutes/", include("commutes.urls")),
     path("admin/", admin.site.urls),
 ]

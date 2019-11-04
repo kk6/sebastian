@@ -14,56 +14,7 @@
   {% endblock %}
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="{% url 'index' %}">
-          <span class="icon is-large">
-            <i class="fab fa-black-tie fa-2x"></i>
-          </span>
-        <h1 class="title">Sebastian</h1>
-      </a>
-
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu">
-      {% if user.is_authenticated %}
-        <div class="navbar-start">
-          <a href="{% url 'book_purchase' %}" class="navbar-item">
-            <span class="icon has-text">
-              <i class="fas fa-pen"></i>
-            </span>
-            <span>購入書籍登録</span>
-          </a>
-          <a href="{% url 'purchase_list' %}" class="navbar-item">
-            <span class="icon has-text">
-              <i class="fas fa-list"></i>
-            </span>
-            <span>購入書籍一覧</span>
-          </a>
-        </div>
-      {% endif %}
-    </div>
-    <div class="navbar-end">
-      {% if user.is_authenticated %}
-        <div class="navbar-item">
-          {% now "SHORT_DATETIME_FORMAT" %}
-        </div>
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-light" href="{% url 'logout' %}">
-              <strong>ログアウト</strong>
-            </a>
-          </div>
-        </div>
-      {% endif %}
-    </div>
-  </div>
-</nav>
+{% include "_components/navbar.html" %}
 {% block content %}
 {% endblock content %}
 {% block footer_js %}{% endblock %}
