@@ -18,7 +18,7 @@ class CommuteApp:
     def create_commute(
         self,
         usage_type: CommuteUsageTypes,
-        usage_text: str,
+        usage_text: typing.Optional[str],
         price: int,
         departure_station: str,
         arrival_station: str,
@@ -42,7 +42,7 @@ class CommuteApp:
     def create_commute_by_form(
         self,
         usage_type: str,
-        usage_text: str,
+        usage_text: typing.Optional[str],
         price: int,
         route: str,
         departure_station: str,
