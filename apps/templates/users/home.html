@@ -6,8 +6,9 @@
   <section class="section">
     <div class="container">
       <div class="content">
-       <h2>Hello {{ user }}!</h2>
-      </div>
+       <h1 class="title is-5">直近1ヶ月以内の購入履歴</h1>
+      {% include "_components/purchases_table.html" with book_purchases=book_purchases %}
+         </div>
     </div>
   </section>
 {% endblock content %}

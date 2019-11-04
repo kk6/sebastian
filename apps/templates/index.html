@@ -1,17 +1,20 @@
 {% extends "_base.html" %}
 {% block content %}
-<section class="hero is-medium is-warning is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Sebastian
-      </h1>
-      <h2 class="subtitle">
-        "Yes, my load."
-      </h2>
-      <a class="button is-dark" href="{% url 'signup' %}">登録</a>
-      <a class="button is-dark" href="{% url 'login' %}">ログイン</a>
+  <section class="hero is-medium is-warning is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <span class="icon is-large">
+        <i class="fab fa-black-tie fa-2x"></i>
+      </span>
+        <h1 class="title">
+          Sebastian
+        </h1>
+        <h2 class="subtitle">
+          "Yes, my load."
+        </h2>
+        <a class="button is-dark" href="{% url 'signup' %}">登録</a>
+        <a class="button is-dark" href="{% url 'login' %}">ログイン</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endblock %}

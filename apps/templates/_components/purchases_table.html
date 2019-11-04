@@ -1,0 +1,38 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>書籍名</th>
+    <th>ISBN</th>
+    <th>購入日</th>
+    <th>価格</th>
+    <th>価格の参考URL</th>
+    <th>申請済み</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for book_purchase in book_purchases %}
+    <tr>
+      <td>{{ book_purchase.title }}</td>
+      <td>{{ book_purchase.isbn|default:"-" }}</td>
+      <td>{{ book_purchase.purchase_at }}</td>
+      <td>{{ book_purchase.price }}</td>
+      <td>
+        {% if book_purchase.price_reference_url %}
+          <a href="{{ book_purchase.price_reference_url }}">URL</a>
+        {% else %}
+          -
+        {% endif %}
+      </td>
+      <td>
+        {% if book_purchase.has_apply %}
+          <span class="icon has-text-success">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
