@@ -12,6 +12,7 @@ class CommuteListView(generic.ListView):
     model = Commute
     context_object_name = "commutes"
     template_name = "commutes/list.html"
+    ordering = ["-date_of_use", "usage_type"]
 
 
 def register_commutes(request):

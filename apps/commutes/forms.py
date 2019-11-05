@@ -25,7 +25,7 @@ class CommuteForm(forms.Form):
         label="利用日",
         widget=forms.TextInput(
             attrs={
-                "class": "datepicker-here",
+                "class": "input datepicker-here",
                 "data-language": "en",
                 "id": "datepicker",
                 "data-multiple-dates": "true",

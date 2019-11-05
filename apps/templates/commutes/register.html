@@ -40,12 +40,9 @@ $(function() {
   <section class="section">
     <div class="container">
       <div class="content">
+        <h1 class="title">交通費を登録</h1>
         <div class="box">
-          <form action="" method="post">
-            {{ form.as_p }}
-            <button type="submit" class="button is-dark">登録</button>
-            {% csrf_token %}
-          </form>
+          {% include "_components/commute_register_form.html" with form=form %}
         </div>
       </div>
     </div>

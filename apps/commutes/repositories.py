@@ -17,7 +17,7 @@ class CommuteRepository:
 
     def create_commute(
         self,
-        usage_type: CommuteUsageTypes,
+        usage_type: "CommuteUsageTypes",
         usage_text: Optional[str],
         departure_station: str,
         arrival_station: str,
