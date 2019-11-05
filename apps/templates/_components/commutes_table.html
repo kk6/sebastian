@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>利用日</th>
+    <th>種別</th>
+    <th>経路</th>
+    <th>金額</th>
+    <th>申請済み</th>
+    <th>編集</th>
+    <th>削除</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for commute in commutes %}
+    <tr>
+      <td>{{ commute.date_of_use }}</td>
+      <td>{{ commute.get_commute_usage_type_label }}</td>
+      <td>{{ commute.departure_station }} → {{ commute.arrival_station }}</td>
+      <td>{{ commute.price }}</td>
+      <td>
+        {% if commute.has_apply %}
+          <span class="icon has-text-success">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+        {% else %}
+          -
+        {% endif %}
+      </td>
+      <td><a href="{% url 'edit_commutes' commute.pk %}"><span class="icon"><i class="fas fa-edit"></i></span></a></td>
+      <td><a href="{% url 'delete_commutes' commute.pk %}"><span class="icon"><i class="fas fa-trash-alt"></i></span></a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

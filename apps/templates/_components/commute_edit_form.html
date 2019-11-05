@@ -1,0 +1,167 @@
+<form action="" method="post">
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <label class="label">{{ form.usage_type.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <div class="select">
+            <select name="{{ form.usage_type.name }}">
+              {% for option in form.usage_type %}
+                {{ option }}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        {% for error in form.usage_type.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+   <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.usage_text.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input{% if form.usage_text.errors %} is-danger{% endif %}" type="text"
+                 id="id_{{ form.usage_text.name }}" name="{{ form.usage_text.name }}" placeholder="">
+        </div>
+        {% for error in form.usage_text.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.departure_station.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input{% if form.departure_station.errors %} is-danger{% endif %}" type="text"
+                 id="id_{{ form.departure_station.name }}" name="{{ form.departure_station.name }}" value="{{ form.departure_station.value }}">
+        </div>
+        {% for error in form.departure_station.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.arrival_station.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input{% if form.arrival_station.errors %} is-danger{% endif %}" type="text"
+                 id="id_{{ form.arrival_station.name }}" name="{{ form.arrival_station.name }}" value="{{ form.arrival_station.value }}">
+        </div>
+        {% for error in form.arrival_station.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.date_of_use.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input datepicker-here{% if form.date_of_use.errors %} is-danger{% endif %}" type="text"
+                 id="id_{{ form.date_of_use.name }}" name="{{ form.date_of_use.name }}" placeholder="" autocomplete="off"
+                 data-language="en" data-date-format="yyyy-m-d"
+                 data-position="top left" value="{{ form.date_of_use.value }}">
+        </div>
+        {% for error in form.date_of_use.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.price.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <input class="input{% if form.price.errors %} is-danger{% endif %}" type="number" id="id_{{ form.price.name }}"
+                 name="{{ form.price.name }}" value="{{ form.price.value }}">
+        </div>
+        {% for error in form.price.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.is_round_trip.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          {{ form.is_round_trip }}
+        </div>
+        {% for error in form.is_round_trip.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">{{ form.has_apply.label }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          {{ form.has_apply }}
+        </div>
+        {% for error in form.has_apply.errors %}
+          <p class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <!-- Left empty for spacing -->
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <button type="submit" class="button is-dark">更新</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% csrf_token %}
+</form>
