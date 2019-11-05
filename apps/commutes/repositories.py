@@ -1,7 +1,19 @@
+from typing import List
 from typing import Optional
 from typing import TYPE_CHECKING
+from typing import Union
+
+from django.db.models import QuerySet  # 下記コメント参照
 
 from .models import Commute
+
+# QuerySetについて::
+#   型ヒントでしか使わないが、型検査時のみインポートにして
+#     - 引用符で囲う -> flake8で警告
+#     - そのまま -> djangoのシステムチェックに引っかかる
+#   となるため常にインポートする
+#   あと、reorder-python-importによってコメントとインポート文が引き離されるので
+#   こういう「下記コメント参照」というような形式で分けてコメントしている
 
 if TYPE_CHECKING:
     from django.conf import settings
@@ -39,3 +51,9 @@ class CommuteRepository:
         )
         commute.save()
         return commute
+
+    def get_user_commutes(
+        self, user_id: int, ordering: Optional[List[str]] = None
+    ) -> Union[QuerySet, List[Commute]]:
+        """ユーザーに紐づくすべての交通費"""
+        return self.model_commute.objects.filter(user=user_id).order_by(*ordering)

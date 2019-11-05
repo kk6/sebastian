@@ -15,6 +15,13 @@ class CommuteListView(generic.ListView):
     context_object_name = "commutes"
     template_name = "commutes/list.html"
     ordering = ["-date_of_use", "usage_type"]
+    repository = CommuteRepository()
+
+    def get_queryset(self):
+        object_list = self.repository.get_user_commutes(
+            self.request.user.pk, self.ordering
+        )
+        return object_list
 
 
 class CommuteUpdateView(generic.UpdateView):

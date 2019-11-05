@@ -82,7 +82,11 @@ class CommuteApp:
                 )
 
 
-def complete_stations(route_type, departure_station, arrival_station):
+def complete_stations(
+    route_type: str,
+    departure_station: typing.Optional[str],
+    arrival_station: typing.Optional[str],
+):
     """経路が「自宅〜会社」の時に駅名を補完する"""
     # TODO: ユーザーのデフォルト経路を登録できるようにしてそれを入れるように直す
     if route_type == "1":
