@@ -35,16 +35,12 @@ class RoundTripCommuteCreationInteractor:
             date_of_use=date_of_use,
             user=user,
         )
-        self._down_line_params = dict(
-            usage_type=usage_type,
-            usage_text=usage_text,
-            price=price,
-            departure_station=arrival_station,
-            arrival_station=departure_station,
-            has_apply=has_apply,
-            date_of_use=date_of_use,
-            user=user,
+        d = self._up_line_params.copy()
+        d["departure_station"], d["arrival_station"] = (
+            d["arrival_station"],
+            d["departure_station"],
         )
+        self._down_line_params = d
 
     def execute(self) -> typing.Tuple[Commute, Commute]:
         up_line_commute = self.commute_repo.create_commute(**self._up_line_params)
