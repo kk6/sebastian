@@ -33,7 +33,7 @@ $(function() {
           <span class="icon is-large">
             <i class="fas fa-subway"></i>
           </span>
-          交通費一覧
+          交通費を編集
         </h1>
         <form action="{% url 'edit_commutes' commute.pk %}" method="post">
           {% include "_components/commute_edit_form.html" %}

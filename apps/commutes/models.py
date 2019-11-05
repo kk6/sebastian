@@ -23,5 +23,8 @@ class Commute(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{CommuteUsageTypes(self.usage_type).name} / {self.date_of_use} / {self.price}"
+
     def get_commute_usage_type_label(self):
         return CommuteUsageTypes(self.usage_type).name.title()

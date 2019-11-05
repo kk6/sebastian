@@ -7,6 +7,7 @@
     <th>金額</th>
     <th>申請済み</th>
     <th>編集</th>
+    <th>削除</th>
   </tr>
   </thead>
   <tbody>
@@ -25,7 +26,8 @@
           -
         {% endif %}
       </td>
-      <td><a href="{% url 'edit_commutes' commute.pk %}">編集</a></td>
+      <td><a href="{% url 'edit_commutes' commute.pk %}"><span class="icon"><i class="fas fa-edit"></i></span></a></td>
+      <td><a href="{% url 'delete_commutes' commute.pk %}"><span class="icon"><i class="fas fa-trash-alt"></i></span></a></td>
     </tr>
   {% endfor %}
   </tbody>

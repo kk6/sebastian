@@ -31,6 +31,12 @@ class CommuteUpdateView(generic.UpdateView):
     template_name = "commutes/edit.html"
 
 
+class CommuteDeleteView(generic.DeleteView):
+    model = Commute
+    success_url = reverse_lazy("commute_list")
+    template_name = "commutes/delete.html"
+
+
 def register_commutes(request):
     """交通費を登録するビュー関数"""
     form = CommuteForm(request.POST or None)
