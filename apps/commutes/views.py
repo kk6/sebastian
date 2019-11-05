@@ -1,9 +1,11 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from .appmodels import CommuteApp
 from .forms import CommuteForm
+from .forms import CommuteUpdateForm
 from .models import Commute
 from .repositories import CommuteRepository
 
@@ -13,6 +15,13 @@ class CommuteListView(generic.ListView):
     context_object_name = "commutes"
     template_name = "commutes/list.html"
     ordering = ["-date_of_use", "usage_type"]
+
+
+class CommuteUpdateView(generic.UpdateView):
+    model = Commute
+    form_class = CommuteUpdateForm
+    success_url = reverse_lazy("commute_list")
+    template_name = "commutes/edit.html"
 
 
 def register_commutes(request):

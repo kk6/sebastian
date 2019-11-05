@@ -6,6 +6,7 @@
     <th>経路</th>
     <th>金額</th>
     <th>申請済み</th>
+    <th>編集</th>
   </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
           -
         {% endif %}
       </td>
+      <td><a href="{% url 'edit_commutes' commute.pk %}">編集</a></td>
     </tr>
   {% endfor %}
   </tbody>

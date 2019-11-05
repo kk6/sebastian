@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" integrity="sha256-q0wZgzQ6Ru67x+pIe9IAztrnlHNHyZui3BMwqUYDnpI=" crossorigin="anonymous" />
+{% endblock css %}
+
+{% block footer_js %}
+{{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js" integrity="sha256-0prQxFtdWQNa3vW5JDMbvbBp6ehKzf9UIWqFGZIWPPE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js" integrity="sha256-RbE9ux8UbaKexk/+aT9XkZ8tcUWg3yw/3XE/S8iW7eI=" crossorigin="anonymous"></script>
+<script>
+$(function() {
+
+  $("[name=usage_type]").change(function() {
+    if($("#id_usage_type_2").prop("checked")) {
+      $("#id_usage_text").prop("disabled", false)
+    }else{
+      $("#id_usage_text").prop("disabled", true)
+    }
+  });
+
+})
+
+</script>
+{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1 class="title is-4">
+          <span class="icon is-large">
+            <i class="fas fa-subway"></i>
+          </span>
+          交通費一覧
+        </h1>
+        <form action="{% url 'edit_commutes' commute.pk %}" method="post">
+          {% include "_components/commute_edit_form.html" %}
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

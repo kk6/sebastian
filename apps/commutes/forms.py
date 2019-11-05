@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import Commute
+
 
 class CommuteForm(forms.Form):
     """交通費の登録フォーム
@@ -56,3 +58,9 @@ class CommuteForm(forms.Form):
             return {f: self.cleaned_data[f] for f in fields}
         else:
             return {f: None for f in fields}
+
+
+class CommuteUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Commute
+        exclude = ("user",)
