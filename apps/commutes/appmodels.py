@@ -1,5 +1,6 @@
 import typing
 
+from .interactors import RoundTripCommuteCreationInteractor
 from .utils import CommuteUsageTypes
 from .utils import dates_str_to_dates
 
@@ -26,7 +27,7 @@ class CommuteApp:
         date_of_use: "date",
         user: "settings.AUTH_USER_MODEL",
     ) -> "Commute":
-        """交通費記録を作成する"""
+        """交通費記録（片道）を作成する"""
         commute = self.commute_repo.create_commute(
             usage_type=usage_type,
             usage_text=usage_text,
@@ -38,6 +39,31 @@ class CommuteApp:
             user=user,
         )
         return commute
+
+    def create_round_trip_commute(
+        self,
+        usage_type: CommuteUsageTypes,
+        usage_text: typing.Optional[str],
+        price: int,
+        departure_station: str,
+        arrival_station: str,
+        has_apply: bool,
+        date_of_use: "date",
+        user: "settings.AUTH_USER_MODEL",
+    ) -> typing.Tuple["Commute", "Commute"]:
+        """往復の交通費を作成する"""
+        interactor = RoundTripCommuteCreationInteractor(self.commute_repo)
+        interactor.set_params(
+            usage_type=usage_type,
+            usage_text=usage_text,
+            departure_station=departure_station,
+            arrival_station=arrival_station,
+            price=price,
+            date_of_use=date_of_use,
+            has_apply=has_apply,
+            user=user,
+        )
+        return interactor.execute()
 
     def create_commute_by_form(
         self,
@@ -59,17 +85,18 @@ class CommuteApp:
         )
         dates_of_use = dates_str_to_dates(date_of_use)
         for _date_of_use in dates_of_use:
-            self.create_commute(
-                usage_type=_usage_type,
-                usage_text=usage_text,
-                departure_station=departure_station,
-                arrival_station=arrival_station,
-                price=price,
-                date_of_use=_date_of_use,
-                has_apply=has_apply,
-                user=user,
-            )
             if is_round_trip:
+                self.create_round_trip_commute(
+                    usage_type=_usage_type,
+                    usage_text=usage_text,
+                    departure_station=departure_station,
+                    arrival_station=arrival_station,
+                    price=price,
+                    date_of_use=_date_of_use,
+                    has_apply=has_apply,
+                    user=user,
+                )
+            else:
                 self.create_commute(
                     usage_type=_usage_type,
                     usage_text=usage_text,
