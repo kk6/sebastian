@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import List
 from typing import Optional
 from typing import TYPE_CHECKING
@@ -16,7 +17,6 @@ from .models import Commute
 #   こういう「下記コメント参照」というような形式で分けてコメントしている
 
 if TYPE_CHECKING:
-    from django.conf import settings
     from datetime import date
     from .utils import CommuteUsageTypes
 
@@ -33,10 +33,10 @@ class CommuteRepository:
         usage_text: Optional[str],
         departure_station: str,
         arrival_station: str,
-        price: int,
+        price: Decimal,
         date_of_use: "date",
         has_apply: bool,
-        user: "settings.AUTH_USER_MODEL",
+        user_id: int,
     ) -> Commute:
         """交通費を作成する"""
         commute = self.model_commute(
@@ -47,10 +47,37 @@ class CommuteRepository:
             price=price,
             date_of_use=date_of_use,
             has_apply=has_apply,
-            user=user,
+            user_id=user_id,
         )
         commute.save()
         return commute
+
+    def create_commute_multiple(
+        self,
+        usage_type: "CommuteUsageTypes",
+        usage_text: Optional[str],
+        departure_station: str,
+        arrival_station: str,
+        price: Decimal,
+        date_of_use: List["date"],
+        has_apply: bool,
+        user_id: int,
+    ) -> List[Commute]:
+        """日付をリストで受け取り日数分の交通費を作成する"""
+        commutes = []
+        for _date in date_of_use:
+            commute = self.create_commute(
+                usage_type=usage_type,
+                usage_text=usage_text,
+                departure_station=departure_station,
+                arrival_station=arrival_station,
+                price=price,
+                date_of_use=_date,
+                has_apply=has_apply,
+                user_id=user_id,
+            )
+            commutes.append(commute)
+        return commutes
 
     def get_user_commutes(
         self, user_id: int, ordering: Optional[List[str]] = None

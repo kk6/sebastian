@@ -1,3 +1,4 @@
+import dacite
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -6,6 +7,7 @@ from django.views import generic
 from .appmodels import CommuteApp
 from .forms import CommuteForm
 from .forms import CommuteUpdateForm
+from .messengers import CommuteRegisterInputDto
 from .models import Commute
 from .repositories import CommuteRepository
 
@@ -44,9 +46,11 @@ def register_commutes(request):
         if form.is_valid():
             commute_repo = CommuteRepository()
             commute_app = CommuteApp(commute_repo)
-            commute_app.create_commute_by_form(
-                user=request.user, **form.get_cleaned_results()
+            input_dto = dacite.from_dict(
+                CommuteRegisterInputDto,
+                dict(user_id=request.user.pk, **form.get_cleaned_results()),
             )
+            commute_app.create_commute_by_form(input_dto)
             return redirect("commute_list")
     context = {"form": form}
     return render(request, "commutes/register.html", context)

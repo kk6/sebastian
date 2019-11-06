@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.8"
 django = "^2.2"
 psycopg2-binary = "^2.8"
+dacite = "^1.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.20"
