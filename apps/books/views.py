@@ -21,7 +21,7 @@ class BookPurchaseCreateView(LoginRequiredMixin, CreateView):
     model = BookPurchase
     form_class = BookPurchaseForm
     template_name = "books/purchase.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("dashboard")
 
     def form_valid(self, form):
         f = form.save(commit=False)
