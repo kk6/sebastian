@@ -7,8 +7,16 @@
     <div class="container">
       <div class="content">
        <h1 class="title is-5">直近1ヶ月以内の購入履歴</h1>
-      {% include "_components/purchases_table.html" with book_purchases=book_purchases %}
-         </div>
+        {% include "_components/purchases_table.html" with book_purchases=book_purchases %}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="content">
+       <h1 class="title is-5">今月の交通費</h1>
+        {% include "_components/commutes_table.html" with commutes=commutes %}
+      </div>
     </div>
   </section>
 {% endblock content %}

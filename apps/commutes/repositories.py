@@ -57,3 +57,9 @@ class CommuteRepository:
     ) -> Union[QuerySet, List[Commute]]:
         """ユーザーに紐づくすべての交通費"""
         return self.model_commute.objects.filter(user=user_id).order_by(*ordering)
+
+    def get_user_commutes_monthly(self, user_id, year, month):
+        """ユーザーに紐づく月ごとの交通費を取得する"""
+        return self.model_commute.objects.filter(
+            user=user_id, date_of_use__year=year, date_of_use__month=month
+        )
