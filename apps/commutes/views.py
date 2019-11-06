@@ -50,7 +50,7 @@ def register_commutes(request):
                 CommuteRegisterInputDto,
                 dict(user_id=request.user.pk, **form.get_cleaned_results()),
             )
-            commute_app.create_commute_by_form(input_dto)
+            commute_app.create_commute_by_register_form(input_dto)
             return redirect("commute_list")
     context = {"form": form}
     return render(request, "commutes/register.html", context)

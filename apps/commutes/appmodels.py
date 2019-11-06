@@ -26,8 +26,12 @@ class CommuteApp:
         interactor.set_params(input_dto)
         return interactor.execute()
 
-    def create_commute_by_form(self, input_dto: CommuteRegisterInputDto) -> None:
-        """フォームデータを加工しつつ交通費記録を作成する"""
+    def create_commute_by_register_form(
+        self, input_dto: CommuteRegisterInputDto
+    ) -> None:
+        """フォームより交通費記録を作成する"""
+        # FIXME: repoに渡す引数はformの知識を持つべきではない気がする。
+        #        input_dtoを持ち込むのはユースケースまでに留めるべき。
         if input_dto.is_round_trip:
             self.create_round_trip_commute(input_dto)
         else:
