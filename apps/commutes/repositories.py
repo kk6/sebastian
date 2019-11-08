@@ -52,33 +52,6 @@ class CommuteRepository:
         commute.save()
         return commute
 
-    def create_commute_multiple(
-        self,
-        usage_type: "CommuteUsageTypes",
-        usage_text: Optional[str],
-        departure_station: str,
-        arrival_station: str,
-        price: Decimal,
-        date_of_use: List["date"],
-        has_apply: bool,
-        user_id: int,
-    ) -> List[Commute]:
-        """日付をリストで受け取り日数分の交通費を作成する"""
-        commutes = []
-        for _date in date_of_use:
-            commute = self.create_commute(
-                usage_type=usage_type,
-                usage_text=usage_text,
-                departure_station=departure_station,
-                arrival_station=arrival_station,
-                price=price,
-                date_of_use=_date,
-                has_apply=has_apply,
-                user_id=user_id,
-            )
-            commutes.append(commute)
-        return commutes
-
     def get_user_commutes(
         self, user_id: int, ordering: Optional[List[str]] = None
     ) -> Union[QuerySet, List[Commute]]:

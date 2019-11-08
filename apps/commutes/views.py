@@ -46,9 +46,10 @@ def register_commutes(request):
         if form.is_valid():
             commute_repo = CommuteRepository()
             commute_app = CommuteApp(commute_repo)
+            cleaned_results = form.get_cleaned_results()
+            commutes = [dict(user_id=request.user.pk, **d) for d in cleaned_results]
             input_dto = dacite.from_dict(
-                CommuteRegisterInputDto,
-                dict(user_id=request.user.pk, **form.get_cleaned_results()),
+                CommuteRegisterInputDto, dict(commutes=commutes)
             )
             commute_app.create_commute_by_register_form(input_dto)
             return redirect("commute_list")

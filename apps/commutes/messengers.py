@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
@@ -9,18 +8,17 @@ from .utils import CommuteUsageTypes
 
 
 @dataclass
-class CommuteRegisterInputDto:
+class CommuteDto:
     usage_type: CommuteUsageTypes
     usage_text: Optional[str]
-    departure_station: Optional[str]
-    arrival_station: Optional[str]
-    date_of_use: List[date]
+    departure_station: str
+    arrival_station: str
     price: Decimal
-    is_round_trip: bool
+    date_of_use: date
     has_apply: bool
     user_id: int
 
-    def to_dict(self):
-        d = asdict(self)
-        d.pop("is_round_trip")
-        return d
+
+@dataclass
+class CommuteRegisterInputDto:
+    commutes: List[CommuteDto]

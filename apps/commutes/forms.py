@@ -83,10 +83,24 @@ class CommuteForm(forms.Form):
             "is_round_trip",
             "has_apply",
         )
+        results = []
         if self.is_valid():
-            return {f: self.cleaned_data[f] for f in fields}
+            r = {f: self.cleaned_data[f] for f in fields}
+            is_round_trip = r.pop("is_round_trip")
+            for date_of_use in r["date_of_use"]:
+                d = r.copy()
+                d["date_of_use"] = date_of_use
+                results.append(d)
+                if is_round_trip:
+                    c = d.copy()
+                    c["departure_station"], c["arrival_station"] = (
+                        d["arrival_station"],
+                        d["departure_station"],
+                    )
+                    results.append(c)
+            return results
         else:
-            return {f: None for f in fields}
+            return None
 
 
 class CommuteUpdateForm(forms.ModelForm):
