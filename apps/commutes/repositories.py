@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import List
 from typing import Optional
 from typing import TYPE_CHECKING
@@ -16,7 +17,6 @@ from .models import Commute
 #   こういう「下記コメント参照」というような形式で分けてコメントしている
 
 if TYPE_CHECKING:
-    from django.conf import settings
     from datetime import date
     from .utils import CommuteUsageTypes
 
@@ -33,10 +33,10 @@ class CommuteRepository:
         usage_text: Optional[str],
         departure_station: str,
         arrival_station: str,
-        price: int,
+        price: Decimal,
         date_of_use: "date",
         has_apply: bool,
-        user: "settings.AUTH_USER_MODEL",
+        user_id: int,
     ) -> Commute:
         """交通費を作成する"""
         commute = self.model_commute(
@@ -47,7 +47,7 @@ class CommuteRepository:
             price=price,
             date_of_use=date_of_use,
             has_apply=has_apply,
-            user=user,
+            user_id=user_id,
         )
         commute.save()
         return commute
